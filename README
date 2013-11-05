@@ -1,0 +1,45 @@
+= UserQuery
+
+This is the rubyforge.com UserQuery package.
+
+== Installation
+
+gem install userquery
+
+== For User Documentation, see
+
+http://rubyforge.org/projects/userquery/
+
+The RubyForge package userquery allows users to do general queries on SQL database table columns using a simple query language. The package parses tokens from the user's query and generates SQL WHERE clauses immune to SQL injection attacks.
+
+For example, if a user wants to search for all entries records on a DATETIME field named date, the user can enter: "11/1/2006" into a text field associated with searching on the date column.
+
+UserQuery will intuitively convert this query into an SQL WHERE clause fragment:
+
+    (
+      (entries.date >= '2006-11-01 00:00:00') 
+    AND 
+      (entries.date <  '2006-11-02 00:00:00')
+    )
+
+The user query syntax includes "NOT", "OR", "AND" operators, grouping with parentheses, well as relational operators like "LESS THAN 5" or ">= $500". Keyword searching, like "foo AND NOT 'bar baz'" using SQL LIKE operators is configurable.This package deals with currencies, conversions between currencies and monetary values in an object-oriented fashion.
+
+== Home page
+
+* {UserQuery Home}[http://userquery.rubyforge.org]
+
+== Additional directories
+
+[./lib/...]      the UserQuery library
+[./test/...]     unit and functional test
+[./examples/...] example programs
+
+== Credits
+
+UserQuery was developed by:
+
+* Kurt Stephens -- ruby-userquery(at)umleta.com
+
+== Contributors
+
+Maybe you?

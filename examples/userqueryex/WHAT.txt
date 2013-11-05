@@ -1,0 +1,16 @@
+rails userqueryex
+svn add userqueryex
+svn ci -m 'UserQuery Example.'
+svn rm --force log/
+svn ci -m 'Remove log/ from svn.' log
+
+# edit config/database.yml
+script/generate migration Foo
+rake migrate
+
+script/generate scaffold Entry
+svn status | grep '?' | cut -d' ' -f 7- | xargs svn add
+
+svn rm --force public/index.html
+# edit config/routes.rb # map.connect '', :controller => 'entries'
+

@@ -1,0 +1,75 @@
+<h1>Listing entries</h1>
+
+<%= start_form_tag :action => 'list' %>
+
+<%= error_messages_for 'query' %>
+
+<table>
+  <tr>
+    <td colspan="9">
+      <%= pagination_links(@entry_pages) %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>ID</th>
+  <% for column in Entry.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+
+  <tr>
+    <td align="right"><%= text_field 'query', 'id', :size => 4 %></td>
+    <td align="left"><%= text_field 'query', 'name', :size => 10 %></td>
+    <td align="left"><%= text_field 'query', 'date', :size => 20 %></td>
+    <td align="left"><%= text_field 'query', 'memo', :size => 20 %></td>
+    <td align="right"><%= text_field 'query', 'amount', :size => 10 %></td>
+    <td align="right"><%= 
+    q_bool = @query.approved
+    if q_bool.nil? || q_bool.to_s.empty?
+      q_bool = ''
+    elsif q_bool.to_s.upcase == 'TRUE' 
+      q_bool = 'TRUE'
+    elsif q_bool.to_s.upcase == 'FALSE'
+      q_bool = 'FALSE'
+    end
+
+    select_tag 'query[approved]', [ '', 'TRUE', 'FALSE' ].
+    map{|x| 
+      '<option' + 
+        (q_bool == x ? ' SELECTED="1"' : '') + 
+      '>' + 
+      x.to_s.upcase + 
+      '</option>'}.join('')
+    %></td>
+    <td align="left" colspan="3"><%= submit_tag 'Search' %></td>
+  </tr>
+  
+<% for entry in @entries %>
+  <tr>
+    <td align="right"><%=h entry.id %></td>
+    <td><%=h entry.name %></td>
+    <td><%=h entry.date.strftime('%Y/%m/%d-%H:%M:%S') %></td>
+    <td><%=h entry.memo %></td>
+    <td align="right"><%=h entry.amount %></td>
+    <td align="right"><%= check_box_tag '_dummy', '', entry.approved, :disabled => true %>|</td>
+    <td><%= link_to 'Show', :action => 'show', :id => entry %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => entry %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => entry }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @entry_pages.current.previous } if @entry_pages.current.previous %>
+<%= link_to 'Next page', { :page => @entry_pages.current.next } if @entry_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New entry', :action => 'new' %>
+
+<h2>UserQuery SQL</h2>
+<pre>
+<%=h @q_sql %>
+</pre>
+
+<%= end_form_tag %>

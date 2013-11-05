@@ -1,0 +1,5 @@
+# edit config/database.yml
+# Install lib/{currency,currency.rb} from http://rubyforge.org/projects/currency/ into vendor/.
+rake migrate
+script/server
+http://localhost:3000/

@@ -1,0 +1,9 @@
+2006-12-02  Kurt Stephens  <kurt@umleta.com>
+
+	* Changed Regexp begin line anchors to begin string anchors.
+	* Locate Currency module relative to project root during tests.
+	
+2006-10-29  Kurt Stephens  <kurt@umleta.com>
+
+	* Initial release
+

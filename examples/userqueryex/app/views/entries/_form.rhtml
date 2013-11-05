@@ -1,0 +1,20 @@
+<%= error_messages_for 'entry' %>
+
+<!--[form:entry]-->
+<p><label for="entry_name">Name</label><br/>
+<%= text_field 'entry', 'name'  %></p>
+
+<p><label for="entry_date">Date</label><br/>
+<%= datetime_select 'entry', 'date'  %></p>
+
+<p><label for="entry_memo">Memo</label><br/>
+<%= text_area 'entry', 'memo'  %></p>
+
+<p><label for="entry_amount">Amount</label><br/>
+<%= text_field 'entry', 'amount'  %></p>
+
+<p><label for="entry_approved">Approved</label><br/>
+<%= check_box 'entry', 'approved'  %></p>
+
+<!--[eoform:entry]-->
+
